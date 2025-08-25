@@ -18,13 +18,13 @@ alwaysApply: false
 2. **브랜치의 커밋 히스토리 분석**
 
    ```bash
-   git log --oneline upstream/main..HEAD
+   git log --oneline origin/main..HEAD
    ```
 
 3. **변경된 파일 목록 확인**
 
    ```bash
-   git diff --name-only upstream/main..HEAD
+   git diff --name-only origin/main..HEAD
    ```
 
 4. **Staged/Unstaged 변경사항 확인**
@@ -83,7 +83,7 @@ git log --pretty=format:"%s" upstream/main..HEAD
 
 ```bash
 # 변경된 파일의 통계
-git diff --stat upstream/main..HEAD
+git diff --stat origin/main..HEAD
 ```
 
 **스터디 특성 분석 기준**:
@@ -118,7 +118,7 @@ git diff --stat upstream/main..HEAD
 1. **커밋 존재 여부**:
 
    ```bash
-   git rev-list --count upstream/main..HEAD
+   git rev-list --count origin/main..HEAD
    ```
 
    - 0개인 경우: "커밋이 없습니다. 변경사항을 커밋 후 다시 시도해주세요."
@@ -126,8 +126,8 @@ git diff --stat upstream/main..HEAD
 2. **원격 브랜치 동기화**:
 
    ```bash
-   git fetch upstream
    git fetch origin
+   git fetch upstream
    ```
 
 3. **기존 PR 존재 여부**:
@@ -330,7 +330,7 @@ gh pr create --title "[Week {주차}] {type}: {주제} - {세부내용}" --body-
 **Base 브랜치 지정**:
 
 - `--base upstream/main`: upstream의 main 브랜치를 base로 지정
-- 포크된 저장소에서 원본 저장소로 PR을 보내기 위함
+- origin에서 upstream으로 PR을 보내기 위함
 
 ### PR 브라우저에서 열기
 
@@ -368,7 +368,7 @@ git push origin $(git branch --show-current) --force-with-lease
 
 **동기화 이유**:
 
-- upstream에 PR을 보낸 후 개인 저장소에도 동일한 내용 보존
+- origin에서 upstream으로 PR을 보낸 후 개인 저장소에도 동일한 내용 보존
 - 다른 기기에서 작업 시 개인 저장소에서 브랜치 확인 가능
 - PR이 merge된 후 개인 저장소 정리 시 참고 자료로 활용
 
@@ -420,14 +420,14 @@ git log --oneline origin/$(git branch --show-current)..HEAD
 ## 체크리스트
 
 - [ ] 브랜치명 확인 및 주차/주제 추출
-- [ ] **Base 브랜치 처리**: upstream/main을 base로 지정
+- [ ] **Base 브랜치 처리**: origin/main을 base로 지정
 - [ ] 템플릿 파일 읽기 및 구조 파악
 - [ ] 타입 자동 판단 및 사용자 확인
 - [ ] 템플릿 구조에 맞는 섹션별 본문 작성
 - [ ] Optional 섹션들 (Review Points, Backlog, LLM Context) 사용자 요청 시 인터렉션으로 작성
-- [ ] PR 생성 (upstream/main을 base로 지정) 및 링크 제공
+- [ ] PR 생성 (origin에서 upstream/main으로 PR 생성) 및 링크 제공
 - [ ] PR을 브라우저에서 자동으로 열기
-- [ ] **개인 저장소 동기화**: origin에 동일한 브랜치 푸시
+- [ ] **개인 저장소 동기화**: origin/main에 동일한 브랜치 푸시
 - [ ] **🧹 임시 파일 정리 (필수)**: pr_body.md 등 생성된 임시 파일 삭제
 
 - [ ] PR을 브라우저에서 자동으로 열기
